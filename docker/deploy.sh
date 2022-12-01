@@ -32,7 +32,7 @@ run_docker_compose() {
         exit 1
     fi
 
-    read -p "Do you want to view the logs? [Y/n]: " view_logs
+    view_logs=N
 
     if [[ "$view_logs" =~ ^([yY][eE][sS]|[yY])$ ]]
     then
@@ -95,7 +95,7 @@ run_docker_swarm() {
         fi
     fi
 
-    read -p "Do you want to view the logs? [Y/n]: " view_logs
+    view_logs=n
     if [[ "$view_logs" =~ ^([yY][eE][sS]|[yY])$ ]]
     then
         echo " "
@@ -118,7 +118,7 @@ echo " "
 echo "Please specify the following options."
 
 while ! [[ "$workspace" =~ ^([yY][eE][sS]|[yY]|[nN][oO]|[nN])$ ]]; do
-    read -p "Are you using Google Workspace as your Identity Provider? [y/n]: " workspace
+    workspace=n
     if [[ "$workspace" =~ ^([yY][eS][sS]|[yY])$ ]]
     then
         workspaceIdP=true
@@ -150,7 +150,7 @@ fi
 
 while :
 do
-    read -p "Docker Swarm or Docker Compose? [swarm/compose]: " docker_type
+    docker_type=compose
     if [[ "$docker_type" =~ ^(swarm|compose)$ ]]
     then
         break
@@ -160,7 +160,7 @@ done
 
 while :
 do
-    read -p "Fully-qualified domain name (FQDN) you are deploying to [e.g: 'op-scim.example.com']: " domain_name
+    domain_name=$(cat "/opt/PurpleComputing/SCIM"/scimdomain)
     if [[ $domain_name = *.* ]]
     then
         break
@@ -170,7 +170,7 @@ done
 
 while :
 do
-    read -p "Path to your scimsession file: " scimsession_file
+    scimsession_file="/opt/PurpleComputing/SCIM/scimsession"
     if [[ -f "$scimsession_file" ]]
     then
         break

@@ -192,7 +192,7 @@ then
 fi
 
 while ! [[ "$proceed" =~ ^([yY][eE][sS]|[yY])$ ]]; do
-    read -p "Does this look correct? [Y/n]: " proceed
+    proceed=y
     if [[ "$proceed" =~ ^([nN][oO][nN])$ ]]
     then
         echo "Exiting..."
